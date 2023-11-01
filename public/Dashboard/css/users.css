@@ -1,0 +1,78 @@
+#add-users{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 500;
+    border: 1px solid rgb(22, 22, 138);
+    background-color: rgb(236, 236, 236);
+
+}
+.user-table {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .user-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .user-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  .user-table th, .user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .user-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .user-table select, .user-table button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #058021;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .user-table select, .user-table button:hover{
+    transition: all ease-in-out .5s;
+    background-color: rgb(2, 145, 2);
+  }
+
+  .user-table select {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+  }
+
+  .user-table select option {
+    text-align: center;
+  }
+
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .user-table th,
+    .user-table td {
+      padding: 5px;
+      font-size: 12px;
+    }
+
+    .user-table select,
+    .user-table button {
+      padding: 3px 6px;
+      font-size: 10px;
+    }
+  }

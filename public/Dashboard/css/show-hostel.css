@@ -1,0 +1,73 @@
+/* Style for the hostel card container */
+.hostel-card {
+    width: 60%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    background-color: #fff;
+  }
+
+  /* Style for the hostel card title (at the top) */
+  .hostel-card-title {
+    font-size: 24px;
+    margin: 0;
+    padding: 14px;
+    text-align: center;
+    background-color: #1e62a5; /* Customize the background color */
+    color: #fff; /* Customize the text color */
+  }
+
+  /* Style for the hostel card content (below the heading) */
+  .hostel-card-content {
+    display: flex;
+  }
+
+  /* Style for the hostel card image (on the left) */
+  .hostel-card-image {
+    flex: 1;
+    max-width: 50%;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  .hostel-card-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Style for the hostel card info (on the right) */
+  .hostel-card-info {
+    flex: 1;
+    padding: 20px;
+    align-items: center;
+  }
+
+
+  /* Style for the styled links/buttons */
+  .styled-link {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #195b9e;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+
+  .styled-link:hover {
+    background-color: #0A2558; /* Change the background color on hover */
+  }
+
+  /* Hover effect */
+  .hostel-card:hover {
+    transform: translateY(-5px);
+  }
