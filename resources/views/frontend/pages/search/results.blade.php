@@ -1,0 +1,112 @@
+@extends("frontend.layouts.app")
+
+@section('main-container')
+
+<section class="bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+  <div class="mx-auto max-w-6xl">
+    <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase text-blue-700">Search Results</p>
+        <h1 class="mt-3 text-4xl font-semibold leading-tight text-slate-950 sm:text-5xl">
+          Find a hostel that fits
+        </h1>
+        <p class="mt-5 text-base leading-8 text-slate-600 sm:text-lg">
+          Adjust your search terms, location, or preference filters to narrow the list.
+        </p>
+      </div>
+
+      <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700">
+        <i class="fas fa-layer-group text-blue-600"></i>
+        {{ $results->total() }} hostel{{ $results->total() !== 1 ? 's' : '' }} found
+      </div>
+    </div>
+
+    <form action="{{ route('searchhere') }}" class="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <div class="grid gap-3 md:grid-cols-[1.6fr_1fr_1fr_auto]">
+        <label class="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3" for="search-input">
+          <i class="fas fa-search text-sm text-slate-400"></i>
+          <input
+            type="text"
+            name="search"
+            id="search-input"
+            value="{{ request('search') }}"
+            class="w-full bg-transparent text-sm text-slate-800 outline-none placeholder:text-slate-400"
+            placeholder="Search hostel, city, or area"
+          >
+        </label>
+
+        <select name="gender" class="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100">
+          <option value="">Gender</option>
+          <option value="male" @selected(request('gender') === 'male')>For Male</option>
+          <option value="female" @selected(request('gender') === 'female')>For Female</option>
+        </select>
+
+        <select name="location" class="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-100">
+          <option value="">Location</option>
+          <option value="gilgit" @selected(request('location') === 'gilgit')>Gilgit</option>
+          <option value="jutial" @selected(request('location') === 'jutial')>Jutial</option>
+          <option value="danyore" @selected(request('location') === 'danyore')>Danyor</option>
+        </select>
+
+        <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+          Search
+          <i class="fas fa-arrow-right text-xs"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="bg-slate-50 px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+  <div class="mx-auto max-w-6xl">
+    @if ($results->count() > 0)
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        @foreach ($results as $hostel)
+          <article class="group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div class="relative h-56 overflow-hidden bg-slate-200">
+              <img src="{{ asset($hostel->hostel_image) }}" alt="{{ $hostel->name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-lg bg-white/95 px-3 py-1 text-xs font-medium text-slate-800">
+                <i class="fas fa-location-dot text-blue-600"></i>
+                {{ $hostel->location }}
+              </div>
+            </div>
+
+            <div class="flex flex-1 flex-col p-5">
+              <h2 class="line-clamp-2 text-xl font-semibold leading-7 text-slate-950 transition group-hover:text-blue-700">{{ $hostel->name }}</h2>
+              <p class="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-slate-600">{{ $hostel->description }}</p>
+
+              <div class="mt-5 flex items-center justify-between border-t border-slate-200 pt-4">
+                <div class="flex items-center gap-2 text-sm text-slate-600">
+                  <i class="fas fa-bed text-blue-600"></i>
+                  <span>{{ \App\Models\RoomSystem::where('hostels_id', $hostel->id)->count() ?? 0 }} rooms</span>
+                </div>
+                <a href="{{ route('hostel-detail', ['id' => $hostel->id]) }}" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition hover:text-slate-950">
+                  View
+                  <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        @endforeach
+      </div>
+
+      @if($results->hasPages())
+        <div class="mt-12 flex justify-center">
+          {{ $results->links() }}
+        </div>
+      @endif
+    @else
+      <div class="rounded-lg border border-slate-200 bg-white p-12 text-center shadow-sm">
+        <i class="fas fa-search mb-4 block text-5xl text-slate-300"></i>
+        <h2 class="text-2xl font-semibold text-slate-950">No results found</h2>
+        <p class="mt-2 text-slate-600">Try changing the search term, gender, or location filter.</p>
+        <a href="{{ route('hostels') }}" class="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+          Browse all hostels
+          <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    @endif
+  </div>
+</section>
+
+@endsection

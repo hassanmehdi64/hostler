@@ -1,387 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>Document</title>
+@extends('frontend.layouts.app')
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+@section('main-container')
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600&family=Sarabun:ital,wght@0,100;0,200;0,300;1,200&display=swap');
+<section class="bg-slate-50 px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+  <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+    <div class="max-w-xl">
+      <p class="text-sm font-semibold uppercase text-blue-700">Login</p>
+      <h1 class="mt-3 text-4xl font-semibold leading-tight text-slate-950 sm:text-5xl">
+        Welcome back to GB Hosteler
+      </h1>
+      <p class="mt-5 text-base leading-8 text-slate-600 sm:text-lg">
+        Sign in to manage hostel information, review dashboard tools, and keep listings clear for users searching across Gilgit-Baltistan.
+      </p>
 
-/* Reset some default styles */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-/* Styles for the container */
-.container {
-    height: 100vh;
-    width: 100%;
-}
-
-.menu {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-}
-
-/* Styles for the left side menu */
-.menu-left {
-    width: 50%;
-    background: #1E7EEA;
-    padding: 20px;
-    padding-top: 60px
-}
-
-.logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.logo img {
-    width: 200px;
-    flex-shrink: 0;
-}
-
-.menu-content {
-    gap: 14px;
-}
-
-.menu-content h1 {
-    color: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-
-.menu-content p {
-    color: #FFF;
-    padding-bottom: 25px;
-    text-align: center;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 170%;
-    width: 420px;
-    text-align: center;
-    margin: auto;
-}
-
-.form-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.input-container {
-    position: relative;
-}
-
-.icon {
-    position: absolute;
-    top: 50%;
-    left: 30px;
-    transform: translateY(-50%);
-    color: #FFF;
-    opacity: 0.9;
-}
-
-input[type="text"],
-input[type="password"] {
-    background: transparent;
-    width: 400px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 32px;
-    border: 2px solid #FFF;
-    color: #FFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 170%;
-    opacity: 0.6;
-    padding-left: 50px;
-}
-
-input::placeholder {
-    color: whitesmoke;
-}
-
-.icon {
-    width: 21px;
-    height: 21px;
-}
-
-.show-password-icon {
-    position: absolute;
-    right: 10px;
-    top: 20px;
-    color: white;
-    opacity: 0.8;
-}
-
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0.5rem;
-}
-
-.btn button {
-    width: 400px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 32px;
-    background: #ffffff;
-    color: #020202;
-    margin-top: 16px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 170%;
-    border: 1px solid rgb(6, 61, 133);
-}
-
-.btn button:hover {
-    transition: all ease 0.3s;
-    background-color: #e8f8ff;
-}
-
-.query {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.query p {
-    color: #3a3737;
-    text-align: center;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 170%;
-}
-
-.query p span {
-    color: #FFF;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 170%;
-}
-
-.text {
-    margin-top: 0.5rem;
-    text-align: center;
-}
-
-.text p {
-    color: #FFF;
-    text-align: center;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 170%;
-}
-
-.line {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
-
-.line p {
-    width: 125px;
-    height: 1px;
-    background: #FFF;
-}
-
-.line h3 {
-    color: #FFF;
-    text-align: center;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 170%;
-}
-
-/* Styles for the right side image */
-.menu-right {
-    background: #F8F8FF;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.menu-right img {
-   width: 100%;
-    height: 100vh;
-}
-
-/* Responsive CSS (You can add your responsive styles here) */
-
-/* Media queries for various screen sizes */
-@media screen and (max-width: 900px) {
-    /* Add your responsive styles for 900px and below here */
-}
-
-@media screen and (max-width: 700px) {
-    /* Add your responsive styles for 700px and below here */
-}
-
-@media screen and (max-width: 500px) {
-    /* Add your responsive styles for 500px and below here */
-}
-
-@media screen and (max-width: 400px) {
-    /* Add your responsive styles for 400px and below here */
-}
-
-    </style>
-  </head>
-  <body>
-
-    <div class="container">
-      <div class="menu">
-        <div class="menu-left">
-          <div class="menu-content">
-            <div class="logo">
-              <img
-                src="{{ "./frontend/images/HOSTELLAR-white-logo.png" }}"
-                alt=""
-              />
-            </div>
-            <h1>Welcome to</h1>
-            <p>
-              Log in to get in the moment updates on the things.
-            </p>
-          </div>
-
-          <div class="alert">
-            @if(@session('message'))
-            {{ @session('message') }}
-            @endif
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-700">
+            <i class="fas fa-building"></i>
+          </span>
+          <h2 class="mt-4 font-semibold text-slate-950">Manage listings</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Keep hostel details, rooms, and images organized.</p>
         </div>
-
-        <form action="{{ route('login') }}" method="POST">
-            @csrf
-
-            <div class="form-input">
-              <div class="input-container">
-                <i class="icon fas fa-user"></i>
-                <input
-                  type="text"
-                  placeholder="Enter Email"  name="email"
-                />
-              </div>
-              <div class="input-container">
-                <i class="icon fas fa-lock"></i>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  id="passwordInput" name="password"
-                />
-                <i
-                  class="show-password-icon fas fa-eye-slash"
-                  id="togglePassword"
-                ></i>
-              </div>
-            </div>
-            <div class="btn">
-              <button>SIGN IN</button>
-            </div>
-            <div class="query">
-              <p>Don't have an account? <span><a href="" style="text-decoration: none; color: #fff;">Sign Up Now</a></span> </p>
-            </div>
-          </form>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
+            <i class="fas fa-message"></i>
+          </span>
+          <h2 class="mt-4 font-semibold text-slate-950">Stay updated</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Access messages, feedback, and admin actions.</p>
         </div>
-
-        <div class="menu-right">
-          <img src="{{ "./frontend/images/form-right.png" }}" alt="Your Image" />
-        </div>
-
       </div>
     </div>
-  </body>
-</html>
 
+    <div class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+      <h2 class="text-2xl font-semibold text-slate-950">Sign in</h2>
+      <p class="mt-2 text-sm text-slate-600">Enter your email and password to continue.</p>
 
+      @if($errors->any())
+        <div class="mt-6 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-800">
+          @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+          @endforeach
+        </div>
+      @endif
 
-  <script>
+      @if(session('message'))
+        <div class="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
+          {{ session('message') }}
+        </div>
+      @endif
 
-const form = document.querySelector("form");
-eField = form.querySelector(".email"),
-eInput = eField.querySelector("input"),
-pField = form.querySelector(".password"),
-pInput = pField.querySelector("input");
+      <form action="{{ route('login') }}" method="POST" class="mt-8 space-y-5">
+        @csrf
 
-form.onsubmit = (e)=>{
-  e.preventDefault(); //preventing from form submitting
-  //if email and password is blank then add shake class in it else call specified function
-  (eInput.value == "") ? eField.classList.add("shake", "error") : checkEmail();
-  (pInput.value == "") ? pField.classList.add("shake", "error") : checkPass();
+        <div>
+          <label for="email" class="block text-sm font-semibold text-slate-700">Email Address</label>
+          <input id="email" name="email" type="email" autocomplete="email" required value="{{ old('email') }}" class="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-100" placeholder="you@example.com">
+        </div>
 
-  setTimeout(()=>{ //remove shake class after 500ms
-    eField.classList.remove("shake");
-    pField.classList.remove("shake");
-  }, 500);
+        <div>
+          <label for="password" class="block text-sm font-semibold text-slate-700">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required class="mt-2 w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-100" placeholder="Enter password">
+        </div>
 
-  eInput.onkeyup = ()=>{checkEmail();} //calling checkEmail function on email input keyup
-  pInput.onkeyup = ()=>{checkPass();} //calling checkPassword function on pass input keyup
+        <label class="flex items-center gap-3 text-sm text-slate-600">
+          <input id="remember" name="remember" type="checkbox" class="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+          Remember me
+        </label>
 
-  function checkEmail(){ //checkEmail function
-    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/; //pattern for validate email
-    if(!eInput.value.match(pattern)){ //if pattern not matched then add error and remove valid class
-      eField.classList.add("error");
-      eField.classList.remove("valid");
-      let errorTxt = eField.querySelector(".error-txt");
-      //if email value is not empty then show please enter valid email else show Email can't be blank
-      (eInput.value != "") ? errorTxt.innerText = "Enter a valid email address" : errorTxt.innerText = "Email can't be blank";
-    }else{ //if pattern matched then remove error and add valid class
-      eField.classList.remove("error");
-      eField.classList.add("valid");
-    }
-  }
+        <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+          Sign in
+          <i class="fas fa-arrow-right text-xs"></i>
+        </button>
+      </form>
 
-  function checkPass(){ //checkPass function
-    if(pInput.value == ""){ //if pass is empty then add error and remove valid class
-      pField.classList.add("error");
-      pField.classList.remove("valid");
-    }else{ //if pass is empty then remove error and add valid class
-      pField.classList.remove("error");
-      pField.classList.add("valid");
-    }
-  }
+      <p class="mt-6 border-t border-slate-200 pt-6 text-center text-sm text-slate-600">
+        Do not have an account?
+        <a href="{{ route('register') }}" class="font-semibold text-blue-700 transition hover:text-slate-950">Create one</a>
+      </p>
+    </div>
+  </div>
+</section>
 
-  //if eField and pField doesn't contains error class that mean user filled details properly
-  if(!eField.classList.contains("error") && !pField.classList.contains("error")){
-    window.location.href = form.getAttribute("action"); //redirecting user to the specified url which is inside action attribute of form tag
-  }
-}
-  </script>
-
-
-
-</body>
-</html>
+@endsection

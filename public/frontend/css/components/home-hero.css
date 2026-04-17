@@ -1,0 +1,376 @@
+/* =========================================================
+   Home Hero Component
+   Final Version
+   - Outer search wrapper removed
+   - Search row is standalone
+   - Filters styled to match search bar
+   - Compact, clean, modern look
+========================================================= */
+
+/* ----------------------
+   Hero Section Layout
+----------------------- */
+.home-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 140px 20px 80px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.home-hero__content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 920px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.home-hero__title {
+  color: #ffffff;
+  margin-bottom: 24px;
+  font-size: clamp(2.4rem, 4vw, 3.7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
+}
+
+/* ----------------------
+   Search Form Layout
+----------------------- */
+.home-hero__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Standalone search row */
+.home-search-panel__row--standalone {
+  width: 100%;
+  max-width: 760px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+/* ----------------------
+   Search Input
+----------------------- */
+.home-search-panel__input-wrap {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 28px rgba(10, 24, 47, 0.18);
+  backdrop-filter: blur(6px);
+}
+
+.home-search-panel__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  color: #8a97a5;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.home-search-panel__input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: transparent;
+  color: #22384d;
+  font-size: 0.96rem;
+  font-weight: 500;
+  padding: 0 4px 0 8px;
+}
+
+.home-search-panel__input::placeholder {
+  color: #7d8894;
+}
+
+.home-search-panel__input:focus {
+  outline: none;
+}
+
+/* ----------------------
+   Search Button
+----------------------- */
+.home-search-panel__button {
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #17324a;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 28px rgba(10, 24, 47, 0.16);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.home-search-panel__button:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+  box-shadow: 0 14px 30px rgba(10, 24, 47, 0.18);
+}
+
+.home-search-panel__button:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(17, 107, 184, 0.16),
+    0 14px 30px rgba(10, 24, 47, 0.18);
+}
+
+/* ----------------------
+   Filters
+   Styled to visually align with search bar
+----------------------- */
+.home-hero__filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 760px;
+  gap: 10px;
+}
+
+.home-hero__filter-item {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 170px;
+}
+
+/* Leading filter-style icon */
+.home-hero__filter-item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  border: 2px solid #8a97a5;
+  border-top: 0;
+  border-radius: 2px 2px 4px 4px;
+  clip-path: polygon(15% 0%, 85% 0%, 62% 42%, 62% 100%, 38% 100%, 38% 42%);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* Custom dropdown arrow */
+.home-hero__filter-item::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #5f7082;
+  border-bottom: 2px solid #5f7082;
+  transform: translateY(-60%) rotate(45deg);
+  pointer-events: none;
+}
+
+.home-hero__select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  height: 46px;
+  padding: 0 40px 0 38px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #22384d;
+  font-size: 0.92rem;
+  font-weight: 600;
+  box-shadow: 0 12px 28px rgba(10, 24, 47, 0.14);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.home-hero__select:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(10, 24, 47, 0.18);
+}
+
+.home-hero__select:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(17, 107, 184, 0.16),
+    0 14px 30px rgba(10, 24, 47, 0.18);
+}
+
+/* Hide old IE arrow */
+.home-hero__select::-ms-expand {
+  display: none;
+}
+
+/* ----------------------
+   Background Slideshow
+----------------------- */
+.home-hero__slideshow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.home-hero__slideshow li {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: imageAnimation 50s linear infinite;
+}
+
+.home-hero__slideshow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.62);
+  z-index: 1;
+}
+
+.home-hero__slideshow li:nth-child(1) {
+  background-image: url("https://img.freepik.com/premium-photo/room-with-view-mountains-sky_912113-41318.jpg?size=626&ext=jpg&uid=R73534188&ga=GA1.1.1092271943.1664946166&semt=sph");
+}
+
+.home-hero__slideshow li:nth-child(2) {
+  background-image: url("https://img.freepik.com/premium-photo/painting-wall-room-with-tent-table_853677-14249.jpg?size=626&ext=jpg&uid=R73534188&ga=GA1.1.1092271943.1664946166&semt=sph");
+  animation-delay: 5s;
+}
+
+.home-hero__slideshow li:nth-child(3) {
+  background-image: url("https://img.freepik.com/free-photo/sleeping-mattress-bright-hostel-background_1253-665.jpg?size=626&ext=jpg&uid=R73534188&ga=GA1.1.1092271943.1664946166&semt=sph");
+  animation-delay: 10s;
+}
+
+.home-hero__slideshow li:nth-child(4) {
+  background-image: url("https://img.freepik.com/premium-photo/cartoon-illustration-people-sitting-living-room-with-couch-window-them_873925-45574.jpg?size=626&ext=jpg&uid=R73534188&ga=GA1.1.1092271943.1664946166&semt=sph");
+  animation-delay: 15s;
+}
+
+.home-hero__slideshow li:nth-child(5) {
+  background-image: url("https://img.freepik.com/premium-photo/hospital-ward-display-architectural-interior-design-residential-house-sample-wallpaper-background_912113-41297.jpg?size=626&ext=jpg&uid=R73534188&ga=GA1.1.1092271943.1664946166&semt=sph");
+  animation-delay: 20s;
+}
+
+/* ----------------------
+   Slideshow Animation
+----------------------- */
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ----------------------
+   Tablet
+----------------------- */
+@media (max-width: 768px) {
+  .home-hero {
+    min-height: 88vh;
+    padding: 120px 16px 60px;
+  }
+
+  .home-search-panel__row--standalone {
+    grid-template-columns: minmax(0, 1fr) 110px;
+  }
+
+  .home-hero__filters {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .home-hero__filter-item {
+    min-width: 155px;
+  }
+}
+
+/* ----------------------
+   Mobile
+----------------------- */
+@media (max-width: 540px) {
+  .home-hero {
+    min-height: 82vh;
+  }
+
+  .home-search-panel__row--standalone {
+    grid-template-columns: 1fr;
+  }
+
+  .home-search-panel__input-wrap {
+    min-height: 46px;
+  }
+
+  .home-search-panel__input {
+    height: 46px;
+  }
+
+  .home-search-panel__button {
+    height: 46px;
+  }
+
+  .home-hero__filters {
+    gap: 8px;
+  }
+
+  .home-hero__filter-item {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .home-hero__select {
+    width: 100%;
+  }
+}

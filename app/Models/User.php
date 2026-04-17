@@ -28,15 +28,11 @@ class User extends Authenticatable
         'status'
     ];
 
+    // ==================== Relationships ====================
 
-    /**
-     * Get the ho associated with the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function addhostel()
     {
-        return $this->hasOne(addHostel::class);
+        return $this->hasOne(Hostels::class, 'user_id');
     }
 
     /**

@@ -1,0 +1,93 @@
+/* ----------------------
+Home Introduction Component
+----------------------- */
+.introduction-section {
+  background-color: #f2f2f2;
+  padding: 80px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.introduction-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.image-container {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding-right: 30px;
+}
+
+.introduction-section img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0 10px;
+}
+
+.introduction-section .text-container {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 10px;
+}
+
+.introduction-section .small-heading {
+  font-size: 20px;
+  text-align: start;
+}
+
+.introduction-section .main-heading {
+  font-size: 30px;
+  color: var(--heading-color);
+  margin-top: 10px;
+  text-align: start;
+}
+
+.introduction-section p {
+  font-size: 16px;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.styled-button {
+  background-color: var(--button-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.styled-button:hover {
+  background-color: var(--button-hover);
+}
+
+@media (max-width: 980px) {
+  .introduction-section {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .introduction-container {
+    flex-direction: column;
+  }
+
+  .introduction-section {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .introduction-section .text-container,
+  .image-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

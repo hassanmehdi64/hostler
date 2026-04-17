@@ -1,0 +1,45 @@
+/* ----------------------
+Home Why Choose Us Component
+----------------------- */
+#why-section-main {
+  background-color: var(--secondary-color);
+  margin-top: 60px;
+}
+
+#why-choose-us {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+#why-choose-us p {
+  line-height: 1.7;
+  margin-bottom: 30px;
+  color: var(--white-color);
+}
+
+.section-heading {
+  font-size: 27px;
+  color: var(--white-color);
+  margin-bottom: 20px;
+  text-align: start;
+}
+
+.choose-us-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.choose-us-list li {
+  margin-bottom: 10px;
+  padding-bottom: 15px;
+  color: var(--white-color);
+}
+
+.choose-us-list i {
+  margin-right: 10px;
+  color: var(--white-color);
+}

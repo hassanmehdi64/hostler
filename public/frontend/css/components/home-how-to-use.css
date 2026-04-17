@@ -1,0 +1,71 @@
+/* ----------------------
+Home How To Use Component
+----------------------- */
+#how-to-use {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.how-to-use-inner {
+  display: flex;
+}
+
+.how-to-use-image {
+  width: 50%;
+  height: auto;
+}
+
+.how-to-use-image img {
+  width: 450px;
+  display: flex;
+  border-radius: 8px;
+  margin: auto;
+  padding-left: 10px;
+}
+
+.how-section-heading {
+  font-size: 27px;
+  color: var(--heading-color);
+  margin-bottom: 10px;
+  text-align: start;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  margin-left: 20px;
+}
+
+.how-to-use-list {
+  list-style-type: decimal;
+  font-size: 17px;
+  line-height: 2;
+  margin-left: 20px;
+  padding-left: 36px;
+  color: var(--text-color);
+}
+
+#how-to-use_content {
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  .how-to-use-inner {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .how-to-use-image {
+    width: 70%;
+    margin: 12px auto 0;
+  }
+}
+
+@media (max-width: 540px) {
+  #how-to-use {
+    padding: 24px 16px;
+  }
+
+  .how-to-use-image {
+    width: 100%;
+  }
+}

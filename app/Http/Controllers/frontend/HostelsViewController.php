@@ -1,114 +1,130 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Feedback;
 use App\Models\Gallery;
 use App\Models\Hostels;
+use App\Models\RoomSystem;
 use App\Models\Settings;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HostelsViewController extends Controller
 {
-    public function index(){
-  $blog =       Blog::latest()->limit(5)->get();
-    $settings =  Settings::find(1);
-  $feedbacks =   \App\Models\Feedback::all();
+    // ==================== Public Pages ====================
 
-        return view('frontend.index' , compact('blog'  , 'settings' , 'feedbacks'));
+    public function index(): View
+    {
+        $blogs = Blog::latest()->limit(5)->get();
+        $settings = Settings::find(1);
+        $feedbacks = Feedback::all();
+
+        return view('frontend.pages.home.index', compact('blogs', 'settings', 'feedbacks'));
     }
 
+    public function about(): View
+    {
+        $hostels = Hostels::limit(8)->get();
+        $blog = Blog::limit(8)->get();
+        $settings = Settings::find(1);
 
-
-    public function gallery(){
-
-        $gallaries =  Gallery::all();
-        $settings =  Settings::find(1);
-        return view('frontend.gallery' , ['gallaries' => $gallaries,
-'settings' => $settings    ]);
+        return view('frontend.pages.about.index', compact('hostels', 'blog', 'settings'));
     }
 
+    public function gallery(): View
+    {
+        $gallaries = Gallery::all();
+        $settings = Settings::find(1);
 
-
-    public function contact(){
-         $settings =  Settings::find(1);
-        return view('frontend.contact' , compact('settings'));
+        return view('frontend.pages.gallery.index', compact('gallaries', 'settings'));
     }
 
+    public function contact(): View
+    {
+        $settings = Settings::find(1);
 
-
-    function blog(){
-         $settings =  Settings::find(1);
-         $blogs =    Blog::all();
-
-        return view('frontend.blog' , compact('settings' , 'blogs'));
+        return view('frontend.pages.contact.index', compact('settings'));
     }
 
-    function blogdetail($id , $title)  {
+    public function blog(): View
+    {
+        $settings = Settings::find(1);
+        $blogs = Blog::all();
 
-      $blog =   Blog::find($id);
- $settings =  Settings::find(1);
-
-        return view('frontend.blogdetail' , compact('blog' , 'settings'));
-
+        return view('frontend.pages.blog.index', compact('settings', 'blogs'));
     }
 
+    public function blogDetail(int $id, string $title): View
+    {
+        $blog = Blog::findOrFail($id);
+        $settings = Settings::find(1);
 
-    function hostels()  {
-
-   $hostels =      Hostels::all();
-    $settings =  Settings::find(1);
-        return view('frontend.all-hostel' , compact('hostels' , 'settings'));
-
+        return view('frontend.pages.blog.show', compact('blog', 'settings'));
     }
 
+    public function hostels(): View
+    {
+        $hostels = Hostels::paginate(12);
+        $settings = Settings::find(1);
 
-    function hostelsdetail($id)  {
-
-    $hostel =      Hostels::find($id);
-     $settings =  Settings::find(1);
-   $rooms  =    \App\Models\RoomSystem::where('hostels_id' , $hostel->id)->get();
-
-     $gallaries =  Gallery::where('hostel_id' , $id)->get();
-
-        return view('frontend.hostel-detail' , compact('hostel' , 'settings' , 'gallaries' , 'rooms'));
-
+        return view('frontend.pages.hostels.index', compact('hostels', 'settings'));
     }
 
-    public function about(){
+    public function hostelsDetail(int $id): View
+    {
+        $hostel = Hostels::findOrFail($id);
+        $settings = Settings::find(1);
+        $rooms = RoomSystem::where('hostels_id', $hostel->id)->get();
+        $gallaries = Gallery::where('hostel_id', $id)->get();
 
-      $hostels=   Hostels::limit(8)->get();
-      $blog=   Blog::limit(8)->get();
-       $settings =  Settings::find(1);
+        return view('frontend.pages.hostels.show', compact('hostel', 'settings', 'gallaries', 'rooms'));
+    }
 
-        return view('frontend.about', compact('hostels' , 'blog' , 'settings'));
-            }
+    public function categoryHostel(string $category): View
+    {
+        $hostels = Hostels::where('location', $category)->get();
+        $settings = Settings::find(1);
 
+        return view('frontend.pages.hostels.category', compact('hostels', 'settings'));
+    }
 
+    // ==================== Search Actions ====================
 
+    public function search(Request $request): View|RedirectResponse
+    {
+        if (!$request->filled('search') && !$request->filled('gender') && !$request->filled('location')) {
+            return redirect()->back();
+        }
 
-            function settings() {
+        $keywords = $request->input('search');
+        $gender = $request->input('gender');
+        $location = $request->input('location');
 
+        $query = Hostels::query();
 
-               $settings =  Settings::find(1);
+        if (!empty($keywords)) {
+            $query->where(function ($searchQuery) use ($keywords) {
+                $searchQuery->where('name', 'like', "%$keywords%")
+                    ->orWhere('location', 'like', "%$keywords%")
+                    ->orWhere('gender', 'like', "%$keywords%");
+            });
+        }
 
+        if (!empty($gender)) {
+            $query->where('gender', $gender);
+        }
 
-                return view('Dashboard.websitesettings' , compact('settings'));
-            }
+        if (!empty($location)) {
+            $query->where('location', 'like', "%$location%");
+        }
 
+        $results = $query->paginate(12)->withQueryString();
+        $settings = Settings::find(1);
 
-
-
-function categoryhostel($category)
-{
-
-
-
-$hostels= Hostels::where('location' , $category)->get();
-$settings = Settings::find(1);
-
-return  view('frontend.search-hostels' , compact('hostels' , 'settings'));
-
-}
-
+        return view('frontend.pages.search.results', compact('results', 'settings'));
+    }
 }

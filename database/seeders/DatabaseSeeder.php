@@ -2,22 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\Blog;
+use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-class DatabaseSeeder extends DatabaseSeeder
+class DatabaseSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        // Create a user with specific data
-        User::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'password' => bcrypt('secret-password'),
+        User::updateOrCreate([
+            'email' => 'admin@hostler.com',
+        ], [
+            'name' => 'Admin',
+            'email_verified_at' => now(),
+            'image' => 'image/profile.png',
+            'password' => Hash::make('admin123'),
+            'phone' => '03001234567',
+            'address' => 'Gilgit',
+            'role' => 1,
+            'status' => 1,
         ]);
-
-        // Create additional users using the factory
-        // Blog::factory(10)->create();
     }
 }
 
